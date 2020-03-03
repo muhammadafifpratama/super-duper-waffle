@@ -3,6 +3,6 @@ let router = express.Router()
 
 let { mongoController } = require('../controllers')
 
-router.get('/home', mongoController.getGame)
+router.get('/home', mongoController.getgame)
 
 module.exports = router

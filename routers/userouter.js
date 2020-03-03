@@ -1,7 +1,7 @@
 const express = require("express")
-const {datagame} = require("../controllers")
+const { user } = require("../controllers")
 const router = express.Router();
 
-router.get("/home",datagame.getgame)
+router.get("/login", user.getuser)
 
 module.exports = router

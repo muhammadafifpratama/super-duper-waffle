@@ -1,7 +1,9 @@
 let mongoRouter = require('./mongoRouter')
-let mysql = require("./mysqlrouter")
+let mysql = require("./datagamerouter")
+let user = require('./userouter')
 
 module.exports = {
     mongoRouter,
-    mysql
+    mysql,
+    user
 }
