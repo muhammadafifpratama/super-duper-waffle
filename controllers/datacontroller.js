@@ -5,7 +5,7 @@ const account = mongodb.url
 module.exports = {
     getgameunder45: (req, res) => {
         var connection = mysql.db
-        let sql = 'select * from finalproject.gamedata where tipe="game" && harga<45000 LIMIT 6;'
+        let sql = `select * from finalproject.gamedata where tipe="game" && harga<45000 LIMIT 5;`
         connection.query(sql, (err, results) => {
             if (err) {
                 res.status(500).send(err)
@@ -59,5 +59,15 @@ module.exports = {
                 // console.log(result[0][283811].data.name);
             })
         })
+    },
+    searching: (req, res) => {
+        var connection = mysql.db
+        let sql = `select * from finalproject.gamedata where nama like '%${req.params.id}%'`
+        connection.query(sql, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
+        });
     }
 }
