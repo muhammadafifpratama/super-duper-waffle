@@ -1,4 +1,5 @@
 const { mysql } = require("../database")
+const crypto = require('crypto')
 
 module.exports = {
     getprofile: (req, res) => {
@@ -51,6 +52,26 @@ module.exports = {
                     res.status(200).send(results)
                 })
             })
+        });
+    },
+    getusername: (req, res) => {
+        var connection = mysql.db
+        let sql = `select username from user`
+        connection.query(sql, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
+        });
+    },
+    getransaction: (req, res) => {
+        var connection = mysql.db
+        let sql = `select * from transaction where username = '${req.params.id}'`
+        connection.query(sql, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
         });
     },
 }
