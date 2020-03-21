@@ -8,5 +8,6 @@ router.get("/profile/:username", user.getprofile)
 router.get("/user", user.getusername)
 router.get("/transaction/:id", user.getransaction)
 router.post('/register', user.register)
+router.patch('/saldo', user.updatesaldo)
 
 module.exports = router

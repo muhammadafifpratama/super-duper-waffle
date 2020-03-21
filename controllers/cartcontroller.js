@@ -82,6 +82,7 @@ module.exports = {
             res.status(200).send(results)
         })
     },
+    
     banyakdata: (req, res) => {
         var connection = mysql.db
         let sql = `select count(namagame) as panjang from transactiondetail where username = '${req.params.id}'`

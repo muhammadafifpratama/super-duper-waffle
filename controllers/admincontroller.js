@@ -3,6 +3,8 @@ module.exports = {
     create: (req, res) => {
         var connection = mysql.db
         let sql = `select * from finalproject.gamedata where nama = ${req.body.name}`
+        // let sql = `select * from transaction where convert(transactiondate, CHAR) BETWEEN  '2020-03-15%' AND '2020-03-20%'; `
+
         connection.query(sql, req.body, (err, results) => {
             if (err) {
                 res.status(500).send(err)

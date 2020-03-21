@@ -8,7 +8,9 @@ router.get("/notgame", datagame.getnotgame)
 router.get("/home/:id", datagame.getgamedetails)
 router.get("/featured", datagame.featuredgame)
 router.get("/asd", datagame.getmongo)
-router.get("/searching/:id", datagame.searching)
+router.get("/searching/:id/:ofset", datagame.searching)
+router.get("/psearching/:id", datagame.panjang)
+router.get("/all", datagame.allgames)
 
 
 module.exports = router

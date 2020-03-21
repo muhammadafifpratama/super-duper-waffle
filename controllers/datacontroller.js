@@ -62,7 +62,27 @@ module.exports = {
     },
     searching: (req, res) => {
         var connection = mysql.db
-        let sql = `select * from finalproject.gamedata where nama like '%${req.params.id}%'`
+        let sql = `select * from finalproject.gamedata where nama like '%${req.params.id}%' limit 9 offset ${req.params.ofset}`
+        connection.query(sql, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
+        });
+    },
+    panjang: (req, res) => {
+        var connection = mysql.db
+        let sql = `select count(id) as panjang from finalproject.gamedata where nama like '%${req.params.id}%'`
+        connection.query(sql, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
+        });
+    },
+    allgames: (req, res) => {
+        var connection = mysql.db
+        let sql = `select * from finalproject.gamedata`
         connection.query(sql, (err, results) => {
             if (err) {
                 res.status(500).send(err)
