@@ -35,7 +35,7 @@ module.exports = {
     },
     getprofile: (req, res) => {
         var connection = mysql.db
-        let sql = `select username, email,saldo from user where username = '${req.params.username}'`
+        let sql = `select * from user where username = '${req.params.username}'`
         connection.query(sql, req.body, (err, results) => {
             if (err) {
                 res.status(500).send(err)
@@ -117,11 +117,11 @@ module.exports = {
     },
     resendEmailConfirm: (req, res) => {
         var mailOption = {
-            from: "Toko Berkah <baronhartono@gmail.com>",
+            from: "Toko",
             to: req.body.email,
             subject: "Email Confirmation",
             html: `Verified your email by clicking this link  
-                <a href="http://localhost:3000/emailverified?email=${req.body.email}">Verified</a>`
+                <a href="http://localhost:3000/verified?email=${req.body.email}">Verified</a>`
         }
 
         transporter.sendMail(mailOption, (err, results) => {
@@ -172,5 +172,29 @@ module.exports = {
             }
             res.status(200).send(results)
         });
+    },
+    setVerified: (req, res) => {
+        var connection = mysql.db
+        let sql = `update finalproject.user set status='verified' where email='${req.params.email}'`
+        connection.query(sql, req.body, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
+        });
+    },
+    kirimemail: (req, res) => {
+        var mailOption = {
+            from: "Toko",
+            to: req.body.email,
+            subject: "Change Password",
+            html: `Please click this link to reset your password  
+                <a href="http://localhost:3000/password?email=${req.body.email}">Reset Password</a>`
+        }
+        transporter.sendMail(mailOption, (err, results) => {
+            if (err) return res.status(500).send({ message: 'Kirim Email Confirmation Gagal!', err })
+
+            res.status(200).send({ message: 'Send Email Success', result: results })
+        })
     },
 }
