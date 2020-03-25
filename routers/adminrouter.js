@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.get("/read", admin.read)
 router.post('/create', admin.create)
+router.patch('/saldo', admin.patching)
 
 module.exports = router

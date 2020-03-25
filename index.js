@@ -9,7 +9,8 @@ app.use(bodyParser.json())
 let { mongoRouter, mysql, user, admin, cart } = require('./routers')
 
 app.use('/mongo', mongoRouter)
-app.use("/data", mysql, user, admin, cart)
+app.use("/data", mysql, user, cart)
+app.use("/admin", admin)
 
 app.get('/', (req, res) => {
     res.send(`<h1>Hello</h1>`)

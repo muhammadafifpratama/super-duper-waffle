@@ -35,5 +35,15 @@ module.exports = {
             }
             res.status(200).send(results)
         });
-    }
+    },
+    patching: (req, res) => {
+        var connection = mysql.db
+        let sql = `update finalproject.voucher set status = 'used' where vouchercol = '${req.body.code}' `
+        connection.query(sql, req.body, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
+        });
+    },
 }

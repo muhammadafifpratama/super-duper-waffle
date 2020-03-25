@@ -84,11 +84,11 @@ module.exports = {
                         return res.status(500).send(err)
                     }
                     var mailOption = {
-                        from: "Toko Berkah <baronhartono@gmail.com>",
+                        from: "Toko",
                         to: req.body.email,
                         subject: "Email Confirmation",
                         html: `Verified your email by clicking this link  
-                            <a href="http://localhost:3000/emailverified?email=${req.body.email}">Verified</a>`
+                            <a href="http://localhost:3000/verified?email=${req.body.email}">Verified</a>`
                     }
                     transporter.sendMail(mailOption, (err, results) => {
                         // if (err) {
@@ -144,6 +144,16 @@ module.exports = {
         var connection = mysql.db
         let sql = `select * from transaction where username = '${req.params.id}'`
         connection.query(sql, (err, results) => {
+            if (err) {
+                res.status(500).send(err)
+            }
+            res.status(200).send(results)
+        });
+    },
+    getvoucher: (req, res) => {
+        var connection = mysql.db
+        let sql = `select * from voucher where vouchercol = '${req.body.code}'`
+        connection.query(sql, req.body, (err, results) => {
             if (err) {
                 res.status(500).send(err)
             }
