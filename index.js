@@ -13,7 +13,7 @@ app.use("/data", mysql, user, cart)
 app.use("/admin", admin)
 
 app.get('/', (req, res) => {
-    res.send(`<h1>Hello</h1>`)
+    res.send(`<h1>muncul kan</h1>`)
 })
 
 app.listen(port, () => console.log(port))

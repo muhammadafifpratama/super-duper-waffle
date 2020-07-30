@@ -36,6 +36,7 @@ module.exports = {
             res.status(200).send(results)
         });
     },
+    
     patching: (req, res) => {
         var connection = mysql.db
         let sql = `update finalproject.voucher set status = 'used' where vouchercol = '${req.body.code}' `

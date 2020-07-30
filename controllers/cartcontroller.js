@@ -74,7 +74,7 @@ module.exports = {
     },
     getinventory: (req, res) => {
         var connection = mysql.db
-        let sql = `select * from transactiondetail where username = '${req.params.id}' limit 10 offset ${req.params.ofset}`
+        let sql = `select * from transactiondetail where username = '${req.params.id}' limit 10 offset ${req.pn.ofset}`
         connection.query(sql, (err, results) => {
             if (err) {
                 return res.status(500).send(err)
