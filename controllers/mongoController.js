@@ -95,6 +95,27 @@ module.exports = {
             })
         })
     },
+    login: (req, res) => {
+        db.connect(url, (err, cli) => {
+            if (err) throw err
+            var dbo = cli.db("tomato").collection("counters")
+            dbo.find({ username: `${req.body.username}`, password: `${req.body.password}` }).toArray(function (err, result) {
+                if (err) {
+                    res.status(500).send(err)
+                }
+                if (result.length > 0) {
+                    return res.status(200).send(result)
+                }
+                if (result.length === 0) {
+                    return res.status(500).send({ message: 'username or password salah' })
+                }
+                else {
+                    cli.close();
+                    res.status(200).send(result)
+                }
+            })
+        })
+    },
     carid: (req, res) => {
         db.connect(url, (err, cli) => {
             if (err) throw err
