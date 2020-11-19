@@ -77,6 +77,27 @@ module.exports = {
 
         })
     },
+    game: (req, res) => {
+        var mulai_dari = parseInt(req.body.mulai)
+        db.connect(url, (err, cli) => {
+            if (err) throw err
+            var dbo = cli.db("tugasakhir").collection("datagame")
+            dbo.find({ gambar: { $in: [/^https/] } }).skip(mulai_dari).limit(9).toArray(function (err, result) {
+                if (err) {
+                    res.status(500).send(err)
+                }
+                cli.close();
+                res.status(200).send(result)
+            })
+        })
+    },
+    forgot: (req, res) => {
+        db.connect(url, (err, cli) => {
+            if (err) throw err
+            var dbo = cli.db("tomato").collection("counters")
+
+        })
+    },
     username: (req, res) => {
         db.connect(url, (err, cli) => {
             if (err) throw err
@@ -97,6 +118,9 @@ module.exports = {
     },
     login: (req, res) => {
         db.connect(url, (err, cli) => {
+            req.body.password = crypto.createHmac('sha256', secret)
+                .update(req.body.password)
+                .digest('hex');
             if (err) throw err
             var dbo = cli.db("tomato").collection("counters")
             dbo.find({ username: `${req.body.username}`, password: `${req.body.password}` }).toArray(function (err, result) {
@@ -127,6 +151,13 @@ module.exports = {
                 // cli.close();
                 // res.status(200).send(result[2])
             })
+        })
+    },
+    template: (req, res) => {
+        db.connect(url, (err, cli) => {
+            if (err) throw err
+            var dbo = cli.db("tomato").collection("counters")
+
         })
     },
 }

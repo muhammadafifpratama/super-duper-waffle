@@ -6,9 +6,9 @@ const bodyParser = require('body-parser')
 app.use(cors())
 app.use(bodyParser.json())
 
-let { mongoRouter, mysql, user, admin, cart } = require('./routers')
+let { mongoRouter, mysql, user, admin, cart, filter } = require('./routers')
 
-app.use('/mongo', mongoRouter)
+app.use('/mongo', mongoRouter, filter)
 app.use("/data", mysql, user, cart)
 app.use("/admin", admin)
 
